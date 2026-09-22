@@ -18,6 +18,7 @@ npm run preview  # förhandsgranska bygget
 | `src/three/process3d.js` | Den scrollstyrda 3D-byggprocessen (Three.js) inkl. ritningsövergången |
 | `src/three/material.js` | Betong-makro → fasad → byggnad (en filtrerad fragment-shader) |
 | `src/three/timeline.js` | Gemensam tidslinje för 3D-scen och UI |
+| `src/three/textures.js` | Procedurella PBR-material (färg, normal, roughness) |
 | `src/lib/*` | Smooth scroll (Lenis + GSAP), reveals, header, flikar, övergångar, modaler |
 | `src/styles/*` | Designsystem (tokens, typografi, knappar) och kapitelstilar |
 
@@ -31,7 +32,8 @@ npm run preview  # förhandsgranska bygget
 ## Prestanda & tillgänglighet
 
 - 3D-scenen och betongshadern laddas först när läsaren närmar sig sektionen (dynamisk import), och renderar bara när de syns.
-- Adaptiv upplösning (DPR) i 3D-scenen; förenklad scen på mobil (inga skuggor, färre träd/personer).
+- Adaptiv upplösning (DPR) i 3D-scenen; förenklad scen på mobil (inga skuggor, ingen efterbearbetning, lägre texturupplösning, färre träd/personer).
+- Desktop: GTAO (ambient occlusion) och subtil bloom via three.js EffectComposer; stängs av under ritningsövergången så att ritningens färger blir exakta.
 - Fallback till bildsekvens om WebGL saknas. `prefers-reduced-motion` stänger av smooth scroll, parallax och dämpning.
 - Semantisk HTML, tangentbordsnavigering (flikar med piltangenter, fokusfälla i dialoger), alt-texter.
 
@@ -44,3 +46,6 @@ och färggraderas enhetligt i CSS (`.ph`) så att de upplevs som en och samma ka
 Foto-ID:n finns samlade i `src/data/images.js`.
 
 Byggnaden i processen och betongfasaden är procedurellt genererade — inga AI-genererade bilder används.
+Materialen i 3D-scenen (betong, trä, gräs, asfalt, marksten) genereras i webbläsaren i `src/three/textures.js`
+med färg-, normal- och roughness-kartor. Ljusmiljön i överlämningsscenen är HDRI:n
+[Venice Sunset](https://polyhaven.com/a/venice_sunset) från Poly Haven (CC0), i `public/env/`.
