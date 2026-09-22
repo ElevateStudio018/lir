@@ -62,7 +62,7 @@ $('[data-p-gallery]').innerHTML = p.gallery
   .join('');
 
 const nextLink = $('[data-p-next]');
-nextLink.href = `/projekt.html?p=${next.slug}`;
+nextLink.href = `projekt.html?p=${next.slug}`;
 nextLink.setAttribute('data-project-link', '');
 $('[data-p-next-title]').innerHTML = next.title.replace(/ (?=\S+$)/, '<br />');
 const nImg = $('[data-p-next-img]');

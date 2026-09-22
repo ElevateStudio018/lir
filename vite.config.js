@@ -32,6 +32,7 @@ function pexelsImages() {
 }
 
 export default defineConfig({
+  base: './',
   plugins: [pexelsImages()],
   build: {
     target: 'es2020',
