@@ -140,13 +140,16 @@ export function createProcessScene(canvas, { mobile = false, reduced = false } =
   let gtao = null;
   let bloom = null;
   let postOK = true;
+  // ?capture: offline video capture — one render per frame, no GTAO (software GL is slow)
+  const CAPTURE = new URLSearchParams(location.search).has('capture');
+  let lastRenderAt = -1e9;
   if (!mobile) {
     composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
     gtao = new GTAOPass(scene, camera, 512, 512);
     gtao.updateGtaoMaterial({ radius: 2.4, distanceExponent: 1.6, thickness: 2.5, scale: 1.1, samples: 12, distanceFallOff: 1 });
     gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 12 });
-    composer.addPass(gtao);
+    if (!CAPTURE) composer.addPass(gtao);
     bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), 0.1, 0.55, 0.88);
     composer.addPass(bloom);
     composer.addPass(new OutputPass());
@@ -1346,6 +1349,8 @@ export function createProcessScene(canvas, { mobile = false, reduced = false } =
   function frame(now) {
     if (!running) return;
     raf = requestAnimationFrame(frame);
+    if (CAPTURE && now - lastRenderAt < 40) return;
+    lastRenderAt = now;
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
 
