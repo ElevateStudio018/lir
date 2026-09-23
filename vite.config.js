@@ -41,6 +41,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         projekt: resolve(import.meta.dirname, 'projekt.html'),
+        tjanster: resolve(import.meta.dirname, 'tjanster.html'),
       },
     },
   },

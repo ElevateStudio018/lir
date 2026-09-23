@@ -673,7 +673,8 @@ button {
 
 .is-loading .hero__inner,
 .is-loading .hero__meta,
-.is-loading .hero__scroll {
+.is-loading .hero__scroll,
+.is-loading .shero__inner {
   visibility: hidden;
 }
 

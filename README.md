@@ -15,6 +15,7 @@ npm run preview  # förhandsgranska bygget
 | --- | --- |
 | `index.html` | Startsidan — elva kapitel från hero till footer |
 | `projekt.html` | Projektsida (`?p=<slug>`), fylls från `src/data/projects.js` |
+| `tjanster.html` | Tjänstesida — sex tjänster i två grupper (Vad vi bygger / Hur vi driver projektet) |
 | `src/three/process3d.js` | Den scrollstyrda 3D-byggprocessen (Three.js) inkl. ritningsövergången |
 | `src/three/material.js` | Betong-makro → fasad → byggnad (en filtrerad fragment-shader) |
 | `src/three/timeline.js` | Gemensam tidslinje för 3D-scen och UI |

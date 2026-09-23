@@ -7,7 +7,7 @@ export const pxSet = (id, ratio) =>
   [640, 960, 1280, 1920, 2560].map((w) => `${px(id, w, ratio ? Math.round(w * ratio) : undefined)} ${w}w`).join(', ');
 
 export const IMG = {
-  hero: 29174068, // Urban construction site at dusk with cranes
+  hero: 34911458, // Urban construction site at dusk with crane — single dominant silhouette, open sky for headline
   craneStockholm: 26728561, // Giraffe crane in Stockholm
   towerCrane: 2323080, // Tower crane on building under construction
   earthworks: 1188532, // Aerial — heavy equipment

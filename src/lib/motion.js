@@ -23,7 +23,13 @@ export function heroIntro() {
   document.body.classList.remove('is-loading');
 }
 
-export function scrollMotion() {
+/**
+ * Split-heading and fade-up reveals — the two patterns every page shares
+ * (`[data-split]` headings, `[data-reveal]` copy). Safe to call on pages
+ * that don't have the homepage's other sections, since it only ever
+ * touches these two generic markers.
+ */
+export function genericReveals() {
   // Split headings → masked line reveals
   document.querySelectorAll('[data-split]').forEach((el) => {
     const lines = splitLines(el);
@@ -47,6 +53,11 @@ export function scrollMotion() {
     onEnter: (els) =>
       gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.08, overwrite: true }),
   });
+}
+
+export function scrollMotion() {
+  genericReveals();
+  if (reducedMotion) return;
 
   // Hero: background 0.9× scroll speed, foreground exits a touch faster
   const hero = document.querySelector('.hero');

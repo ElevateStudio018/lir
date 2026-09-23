@@ -1,0 +1,218 @@
+/* =========================================================
+   Tjänster — dedicated services page
+   ========================================================= */
+
+.shero {
+  position: relative;
+  min-height: 86vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink);
+}
+.shero__media {
+  position: absolute;
+  inset: -8% 0;
+  z-index: -2;
+}
+.shero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(11, 17, 19, 0.8) 0%, rgba(11, 17, 19, 0.3) 50%, rgba(11, 17, 19, 0.1) 100%),
+    linear-gradient(0deg, rgba(11, 17, 19, 0.88) 0%, rgba(11, 17, 19, 0) 45%);
+}
+.shero__inner {
+  padding-bottom: clamp(56px, 11vh, 128px);
+}
+.shero__title {
+  margin: 24px 0 28px;
+}
+.shero__lead {
+  max-width: 520px;
+  font-size: var(--fs-lead);
+  color: rgba(244, 243, 239, 0.82);
+}
+
+/* Group intro strip */
+.sgroup-head {
+  padding: clamp(64px, 10vh, 120px) 0 clamp(32px, 6vh, 64px);
+}
+.sgroup-head .grid {
+  align-items: end;
+  row-gap: 20px;
+}
+.sgroup-head .eyebrow {
+  grid-column: 1 / 5;
+}
+.sgroup-head h2 {
+  grid-column: 1 / 10;
+  font-size: clamp(34px, 3.6vw, 58px);
+  text-transform: none;
+  letter-spacing: -0.03em;
+}
+.sgroup-head p {
+  grid-column: 8 / 13;
+  color: var(--muted);
+  font-size: 16px;
+  padding-bottom: 6px;
+}
+[data-theme='light'] .sgroup-head {
+  background: var(--paper);
+}
+[data-theme='dark'] .sgroup-head {
+  background: var(--ink);
+  color: var(--paper);
+}
+[data-theme='dark'] .sgroup-head p {
+  color: var(--muted-dark);
+}
+
+/* Alternating service rows */
+.srow {
+  position: relative;
+  padding: clamp(28px, 5vh, 56px) 0;
+}
+.srow__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: center;
+}
+.srow__media {
+  grid-column: 1 / 7;
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+}
+.srow__body {
+  grid-column: 8 / 13;
+}
+.srow--rev .srow__media {
+  grid-column: 7 / 13;
+  grid-row: 1;
+}
+.srow--rev .srow__body {
+  grid-column: 1 / 6;
+  grid-row: 1;
+}
+.srow__no {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--accent);
+}
+.srow__title {
+  font-size: clamp(30px, 2.8vw, 46px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.srow__lead {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.srow__text {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+[data-theme='dark'] .srow__text {
+  color: var(--muted-dark);
+}
+.srow__metrics {
+  display: flex;
+  gap: clamp(24px, 3vw, 44px);
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+[data-theme='dark'] .srow__metrics {
+  border-top-color: var(--line-dark);
+}
+.srow__metrics div {
+  display: flex;
+  flex-direction: column;
+}
+.srow__metrics dd {
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  order: -1;
+  margin-bottom: 6px;
+}
+.srow__metrics dt {
+  color: var(--muted);
+}
+[data-theme='dark'] .srow__metrics dt {
+  color: var(--muted-dark);
+}
+
+@media (max-width: 900px) {
+  .sgroup-head .eyebrow,
+  .sgroup-head h2,
+  .sgroup-head p {
+    grid-column: 1 / -1;
+  }
+  .sgroup-head p {
+    padding-bottom: 0;
+  }
+  .srow__grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .srow__media,
+  .srow--rev .srow__media {
+    aspect-ratio: 4 / 3;
+  }
+  .srow__body,
+  .srow--rev .srow__body {
+    margin-top: 28px;
+  }
+  .srow__metrics {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+
+/* Process teaser band */
+.sprocess {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 56vh;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--paper);
+}
+.sprocess__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.sprocess__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(11, 17, 19, 0.86) 0%, rgba(11, 17, 19, 0.35) 60%, rgba(11, 17, 19, 0.15) 100%);
+}
+.sprocess__inner {
+  padding-block: clamp(48px, 8vh, 96px);
+  max-width: 640px;
+}
+.sprocess h2 {
+  margin: 22px 0 24px;
+}
+.sprocess p {
+  font-size: var(--fs-lead);
+  color: rgba(244, 243, 239, 0.82);
+  margin-bottom: 32px;
+  max-width: 480px;
+}
