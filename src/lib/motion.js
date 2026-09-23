@@ -59,21 +59,23 @@ export function scrollMotion() {
   genericReveals();
   if (reducedMotion) return;
 
-  // Hero: background 0.9× scroll speed, foreground exits a touch faster
+  // Hero: background drifts slower than scroll, copy fades as it exits
   const hero = document.querySelector('.hero');
-  gsap.to('[data-hero-media]', {
-    yPercent: 10,
-    ease: 'none',
-    scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-  });
-  gsap.to('.hero__inner, .hero__meta', {
-    y: -80,
-    opacity: 0.1,
-    ease: 'none',
-    scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-  });
+  if (hero) {
+    gsap.to('[data-hero-media]', {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+    });
+    gsap.to('.hero__copy', {
+      y: -60,
+      opacity: 0.15,
+      ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+    });
+  }
 
-  // Generic image parallax
+  // Generic image parallax (about/closer band photos)
   document.querySelectorAll('[data-parallax]').forEach((el) => {
     const amt = parseFloat(el.dataset.parallax) || 0.1;
     gsap.fromTo(
@@ -87,77 +89,31 @@ export function scrollMotion() {
     );
   });
 
-  // Services: staggered depth — each column drifts at its own speed
-  gsap.utils.toArray('.service').forEach((el, i) => {
+  // Service & project cards: gentle staggered rise + image curtain reveal
+  gsap.utils.toArray('.scard').forEach((el, i) => {
     gsap.fromTo(
       el,
-      { y: 40 + i * 50 },
-      { y: -20 - i * 30, ease: 'none', scrollTrigger: { trigger: '.services', start: 'top bottom', end: 'bottom top', scrub: true } },
+      { y: 30 },
+      { y: -10, ease: 'none', scrollTrigger: { trigger: '.scard-grid', start: 'top bottom', end: 'bottom top', scrub: true } },
     );
   });
-
-  // Image curtain reveals
-  gsap.utils.toArray('.service__media, .pcard, .about__media, .sustain__media').forEach((el) => {
+  gsap.utils.toArray('.scard__media, .pcard__media, .about__media').forEach((el) => {
     gsap.fromTo(
       el,
-      { clipPath: 'inset(12% 0% 0% 0%)' },
+      { clipPath: 'inset(10% 0% 0% 0%)' },
       {
         clipPath: 'inset(0% 0% 0% 0%)',
         ease: 'none',
-        scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 45%', scrub: true },
+        scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 55%', scrub: true },
       },
     );
   });
 
-  // Numbers: the row travels horizontally as you pass
-  const mm = gsap.matchMedia();
-  mm.add('(min-width: 901px)', () => {
-    // Subtle lateral drift — the row glides past like a horizontal band
-    gsap.fromTo(
-      '.numbers__row',
-      { x: () => window.innerWidth * 0.06 },
-      {
-        x: () => -window.innerWidth * 0.03,
-        ease: 'none',
-        scrollTrigger: { trigger: '.numbers', start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
-      },
-    );
-    gsap.utils.toArray('.num').forEach((el, i) =>
-      gsap.fromTo(el, { opacity: 0, y: 40 }, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        delay: i * 0.08,
-        ease: 'expo.out',
-        scrollTrigger: { trigger: '.numbers__row', start: 'top 85%', once: true },
-      }),
-    );
-  });
-
-  // Human: headline scales very slightly into place
-  gsap.fromTo('.human__title', { scale: 1.06, transformOrigin: 'left bottom' }, {
+  // Closing band: photo settles as the section arrives
+  gsap.fromTo('.closer__media img', { scale: 1.12 }, {
     scale: 1,
     ease: 'none',
-    scrollTrigger: { trigger: '.human', start: 'top bottom', end: 'bottom bottom', scrub: true },
-  });
-
-  // CTA image settles as it arrives
-  gsap.fromTo('[data-cta-media]', { scale: 1.14 }, {
-    scale: 1,
-    ease: 'none',
-    scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom bottom', scrub: true },
-  });
-
-  // Footer statement slides in from both sides
-  gsap.fromTo('.footer__statement span:first-child', { xPercent: -8 }, {
-    xPercent: 0,
-    ease: 'none',
-    scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'top 30%', scrub: true },
-  });
-  gsap.fromTo('.footer__statement span:last-child', { xPercent: 8 }, {
-    xPercent: 0,
-    ease: 'none',
-    scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'top 30%', scrub: true },
+    scrollTrigger: { trigger: '.closer', start: 'top bottom', end: 'bottom bottom', scrub: true },
   });
 }
 

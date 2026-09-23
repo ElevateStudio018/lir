@@ -28,4 +28,6 @@ export const IMG = {
   skylineDusk: 19660456, // Cranes in city skyline at dusk
   workersSunset: 13319079, // Silhouette of construction workers at sunset
   excavator: 13098128, // Excavator at construction site
+  aerialLake: 29547677, // Aerial view of calm lake and lush forest at sunrise
+  timberCourtyard: 29024993, // Modern urban courtyard with trees and ivy
 };
