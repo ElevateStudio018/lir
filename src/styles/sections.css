@@ -1228,6 +1228,12 @@
   padding-top: 28px;
   color: rgba(244, 243, 239, 0.45);
 }
+.footer__legal a {
+  transition: color 0.3s;
+}
+.footer__legal a:hover {
+  color: var(--paper);
+}
 .footer__top { margin-left: auto; color: var(--paper); }
 @media (max-width: 900px) {
   .footer__grid { grid-template-columns: 1fr 1fr; }

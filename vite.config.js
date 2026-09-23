@@ -42,6 +42,8 @@ export default defineConfig({
         main: resolve(import.meta.dirname, 'index.html'),
         projekt: resolve(import.meta.dirname, 'projekt.html'),
         tjanster: resolve(import.meta.dirname, 'tjanster.html'),
+        integritetspolicy: resolve(import.meta.dirname, 'integritetspolicy.html'),
+        cookies: resolve(import.meta.dirname, 'cookies.html'),
       },
     },
   },

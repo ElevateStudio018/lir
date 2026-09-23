@@ -23,6 +23,11 @@ const $ = (s) => document.querySelector(s);
 
 document.title = `${p.title} — LIR Bygg & Anläggning`;
 $('meta[name="description"]').setAttribute('content', p.lead);
+// Static OG tags in <head> cover link-preview crawlers (most don't run JS);
+// this keeps the tab title/description and any JS-aware unfurl in sync too.
+$('meta[property="og:title"]')?.setAttribute('content', `${p.title} — LIR Bygg & Anläggning`);
+$('meta[property="og:description"]')?.setAttribute('content', p.lead);
+$('meta[property="og:image"]')?.setAttribute('content', px(p.img, 1200, 630));
 
 // Hero — reuse the exact image the card expanded, so the hand-over is seamless.
 let handoff = null;
